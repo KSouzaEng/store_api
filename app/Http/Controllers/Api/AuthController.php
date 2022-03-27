@@ -11,6 +11,7 @@ class AuthController extends Controller
 {
      public function login(LoginRequest $request)
     {
+        // return response()->json(['success' => 'teste'], 200);
         $input = $request->validated();
 
         $credentials = [
@@ -46,6 +47,7 @@ class AuthController extends Controller
      */
     public function logout()
     {
+
         auth()->logout();
 
         return response()->json(['message' => 'Successfully logged out']);
@@ -68,5 +70,12 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-
+    protected function respondWithToken($token)
+    {
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60
+        ]);
+    }
 }
