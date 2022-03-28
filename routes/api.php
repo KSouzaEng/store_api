@@ -28,3 +28,8 @@ Route::get('me', [AuthController::class,'me']);
 
 Route::post('register', [UserController::class,'register']);
 
+
+    Route::put('/user/update/{id}', [UserController::class,'update']);
+    Route::delete('delete/user/{id}',[UserController::class,'destroy']);
+
+
