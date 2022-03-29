@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTipoClientesTable extends Migration
+class CreateImagemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateTipoClientesTable extends Migration
      */
     public function up()
     {
-        Schema::create('tipo_clientes', function (Blueprint $table) {
+        Schema::create('imagems', function (Blueprint $table) {
             $table->id();
-            $table->string('tipo_pessoa');
             $table->unsignedBigInteger('cliente_id');
             $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
+            $table->string('imagem');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateTipoClientesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipo_clientes');
+        Schema::dropIfExists('imagems');
     }
 }

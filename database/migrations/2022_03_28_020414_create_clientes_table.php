@@ -17,9 +17,6 @@ class CreateClientesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email');
-            $table->string('imagem');
-            $table->unsignedBigInteger('vendedor_id');
-            $table->foreign('vendedor_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

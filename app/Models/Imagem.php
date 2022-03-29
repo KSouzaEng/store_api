@@ -5,12 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class VendedorCliente extends Model
+class Imagem extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'vendedor_id','cliente_id',
+       'cliente_id','url'
     ];
 
+    public function cliente()
+    {
+        return $this->belongsTo(Cliente::class);
+    }
 }

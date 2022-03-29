@@ -25,4 +25,8 @@ class Cliente extends Model
     {
         return $this->hasMany(Tipocliente::class);
     }
+    public function imagem()
+    {
+        return $this->hasMany(Imagem::class);
+    }
 }

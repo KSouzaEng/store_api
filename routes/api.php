@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\ClienteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,10 +27,20 @@ Route::post('refresh',  [AuthController::class,'refresh']);
 Route::get('me', [AuthController::class,'me']);
 
 
-Route::post('register', [UserController::class,'register']);
+    Route::post('register', [UserController::class,'register']);
 
 
-    Route::put('/user/update/{id}', [UserController::class,'update']);
-    Route::delete('delete/user/{id}',[UserController::class,'destroy']);
 
+
+    // Route::middleware(['auth'])->group(function () {
+        Route::put('/user/update/{id}', [UserController::class,'update']);
+        Route::delete('delete/user/{id}',[UserController::class,'destroy']);
+
+        //Rotas do Cliente
+        Route::post('register/cliente', [ClienteController::class,'registerCliente']);
+        Route::get('get/cliente/{search}',[ClienteController::class,'search']);
+
+        Route::put('/update/cliente/{id}',[ClienteController::class,'updateCliente']);
+        Route::delete('delete/cliente/{id}',[ClienteController::class,'destroy']);
+    // });
 

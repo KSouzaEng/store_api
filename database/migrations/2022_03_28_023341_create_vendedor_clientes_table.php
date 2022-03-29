@@ -16,9 +16,9 @@ class CreateVendedorClientesTable extends Migration
         Schema::create('vendedor_clientes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('vendedor_id');
-            $table->foreign('vendedor_id')->references('id')->on('users');
+            $table->foreign('vendedor_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('cliente_id');
-            $table->foreign('cliente_id')->references('id')->on('clientes');
+            $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
             $table->timestamps();
         });
     }
