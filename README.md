@@ -97,6 +97,8 @@ Ou cole em sua pasta de preferência
   cp .env.example .env
 
   php artisan key:generate
+  
+  php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
 
   php artisan jwt:secret
 
@@ -104,6 +106,8 @@ Ou cole em sua pasta de preferência
 
 ```
 obs: A flag --seed gera usuarios falasos que podem logar no sistema, senha padrão é  **password**
+
+
 ## Arquivo de banco de dados
 
 - O arquivo de banco de dados encontra-se na raiz do projeto e tem como nome .env, dentro deste arquivo você configura a sua conexão com a base de dados.
