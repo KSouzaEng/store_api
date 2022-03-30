@@ -40,7 +40,7 @@ class UserController extends Controller
     }
     public function update(UserRequest $request,$id){
 
-        // return response()->json(['sucssess' =>  $id], 200);
+        // return response()->json(['sucssess' =>  $request], 200);
         try {
             $input = $request->validated();
 

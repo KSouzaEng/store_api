@@ -35,7 +35,7 @@ class ClienteController extends Controller
 
             if(!$cliente){
 
-                return response()->json(['error' => 'Não foi possível registrar os usuario'], 400);
+                return response()->json(['error' => 'Não foi possível registrar o usuario'], 400);
               }else{
 
                 $vendeor_cliente = VendedorCliente::create([
@@ -57,7 +57,10 @@ class ClienteController extends Controller
 
                     ]);
 
-                    Notification::send(['krmcristine@gmail.com'], new NewClient());
+
+                        Notification::route('mail', config('mail.from.address'))
+                        ->notify(new NewClient($cliente));
+
 
                     return response()->json(['success' =>  $cliente], 200);
 
@@ -84,10 +87,11 @@ class ClienteController extends Controller
     }
     public function updateCliente(ClienteRequest $request,$id){
 
-        return response()->json(['sucssess' =>  $request], 200);
-        try {
-            // $input = $request->validated();
 
+        try {
+            $input = $request->validated();
+
+            return response()->json(['sucssess' =>  $input], 200);
             $name = $request['imagem']->getClientOriginalName();
 
             $path = $request['imagem']->store('public/clientes');
@@ -144,30 +148,5 @@ class ClienteController extends Controller
         }
             // $rel
     }
-    public function saveFile(Request $request){
 
-        try {
-            $input = $request->validated();
-
-            $cliente = Cliente::create([
-                'cliente_id' => $request->cliente_id
-
-            ]);
-
-
-            if(!$cliente){
-
-                 return response()->json(['error' => 'Não foi possível deletar o usuario'], 400);
-
-            }else{
-                return response()->json(['sucssess' =>  $cliente], 200);
-
-            }
-
-
-        } catch (\Illuminate\Database\QueryException $e) {
-            return response()->json(['error' => $e->errorInfo], 500);
-        }
-            // $rel
-    }
 }
