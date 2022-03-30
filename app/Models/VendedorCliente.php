@@ -9,8 +9,11 @@ class VendedorCliente extends Model
 {
     use HasFactory;
 
+    protected $table = "vendedor_clientes";
+
     protected $fillable = [
         'vendedor_id','cliente_id',
     ];
+
 
 }

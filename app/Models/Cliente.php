@@ -14,9 +14,9 @@ class Cliente extends Model
         'name', 'email', 'imagem','cliente_id',
     ];
 
-    public function vendedor(){
-
-        return $this->belongsToMany(User::class, 'vendedor_clientes');
+    public function vendedor()
+    {
+        return $this->belongsToMany(User::class, 'vendedor_clientes', 'cliente_id','vendedor_id');
     }
     public function telefone()
     {

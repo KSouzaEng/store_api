@@ -32,7 +32,7 @@ Route::get('me', [AuthController::class,'me']);
 
 
 
-    // Route::middleware(['auth'])->group(function () {
+    Route::middleware(['auth'])->group(function () {
         Route::put('/user/update/{id}', [UserController::class,'update']);
         Route::delete('delete/user/{id}',[UserController::class,'destroy']);
 
@@ -42,5 +42,5 @@ Route::get('me', [AuthController::class,'me']);
 
         Route::put('/update/cliente/{id}',[ClienteController::class,'updateCliente']);
         Route::delete('delete/cliente/{id}',[ClienteController::class,'destroy']);
-    // });
+    });
 

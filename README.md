@@ -1,61 +1,139 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Documentação API
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+![GitHub language count](https://img.shields.io/github/languages/top/KSouzaEng/store_api) ![GitHub language count](https://img.shields.io/github/languages/count/KSouzaEng/store_api)  ![GitHub language count](https://img.shields.io/github/last-commit/KSouzaEng/store_api)  
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Roteamento da API
 
-## Learning Laravel
+- As funções de roteamento desta API encontram-se dentro da pasta routes no arquivo api.php e contam com as seguintes rotas:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+```
+Route::post('login', [AuthController::class,'login']);
+Route::post('logout',  [AuthController::class,'logout']);
+Route::post('refresh',  [AuthController::class,'refresh']);
+Route::get('me', [AuthController::class,'me']);
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
+Route::post('register', [UserController::class,'register']);
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Route::middleware(['auth'])->group(function () {
 
-### Premium Partners
+Rotas do Usuário
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+    Route::put('/user/update/{id}', [UserController::class,'update']);
+    Route::delete('delete/user/{id}',[UserController::class,'destroy']);
 
-## Contributing
+ Rotas do Cliente
+        Route::post('register/cliente', [ClienteController::class,'registerCliente']);
+        Route::get('get/cliente/{search}',[ClienteController::class,'search']);
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+        Route::put('/update/cliente/{id}',[ClienteController::class,'updateCliente']);
+        Route::delete('delete/cliente/{id}',[ClienteController::class,'destroy']);
+    });
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```
+##  Modelos
 
-## Security Vulnerabilities
+- A API conta com os Modelos:  
+  
+```
+  Cliente: App/Models/Cliente
+  Telefone: App/Models/Telefone
+  TipoCliente: App/Models/TipoCliente
+  User: App/Models/User
+  VendedorCliente: App/Models/VendedorCliente
+```
+## As tabelas do banco de dados são:
+```
+  Clientes: database/migrations/2022_03_28_020414_create_clientes_table.php
+  Telefones: database/migrations/2022_03_28_021431_create_telefones_table.php
+  Tipo de Clientes:database/migrations/2022_03_28_021505_create_tipo_clientes_table.php
+  Vendedores:database/migrations/2022_03_28_023341_create_vendedor_clientes_table.php
+  Jobs:database/migrations/2022_03_29_223216_create_jobs_table.php
+```
+##  Implementando as funções
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- As funções descritas nas rotas encontram-se em : 
+  
+```
+  Cliente: App/Htpp/Controllers/ClienteController
+   - registerCliente - registra o cliente
+   - search -  Faz busca pelo nome do cliente
+   - updateCliente - Atualiza os dados do cliente
+   - destroy - Deleta o cliente da base de dados
 
-## License
+  Usuários: App/Htpp/Controllers/AuthController
+  - login - Entrada do usuário na aplicação
+  - logout - Saída do usuário da aplicação
+  - me - Lista dados de um usuário
+  - refresh - atualiza o token da sessão
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+  Vendedor: App/Htpp/Controllers/UserController
+  - register - registra o vendedor no sistema
+  - update  - Atualiza os dados do vendedor
+  - destroy -  Deleta o vendedor da base de dados
+```
+## Instalação do projeto
+Para iniciar o desenvolvimento, é necessário clonar o projeto do GitHub em um diretório de sua preferência:
+
+ ```
+  Caso esteja usando o laragon entre em cd "C:\laragon\www "  e abra o cmd ou terminal nesta pasta e cole o comando a seguir  
+    git clone https://github.com/KSouzaEng/store_api.git
+
+Caso esteja usando o laragon entre em cd "C:\xampp\htdocs"  e abra o cmd ou terminal nesta pasta e cole o comando a seguir
+   git clone https://github.com/KSouzaEng/store_api.git
+
+Ou cole em sua pasta de preferência
+ ```
+
+##  Configurando a aplicação 
+  Antes de rodar a aplicação é necessário executar os seguintes commandos.
+```
+  composer install
+
+  cp .env.example .env
+
+  php artisan key:generate
+
+  php artisan jwt:secret
+
+  php artisan migrate --seed 
+
+```
+obs: A flag --seed gera usuarios falasos que podem logar no sistema, senha padrão é  **password**
+## Arquivo de banco de dados
+
+- O arquivo de banco de dados encontra-se na raiz do projeto e tem como nome .env, dentro deste arquivo você configura a sua conexão com a base de dados.
+  
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=store
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+## Rodando a api
+```shell
+php artisan serve
+```
+## Rodando as filas
+```shell
+  php artisan queue:work --tries=3  
+
+  obs: 3 é o numero de tentativas realizadas para o envio da notificação pode ser alterado para um numero maior de tentativas
+```
+## Consumir a API 
+
+para consumir a api pode ser usado o Postman ou o Insomnia
+
+- [Postman](https://www.postman.com/downloads/)
+- [Insomnia](https://insomnia.rest/download)
+
+## Visualizar o código
+
+[Visual Studio Code: Para editar do projeto ](https://code.visualstudio.com/download)

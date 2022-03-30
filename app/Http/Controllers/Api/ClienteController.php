@@ -74,7 +74,7 @@ class ClienteController extends Controller
     public function search($name){
 
         try {
-            $cliente = Cliente::where('name','like','%'.$name.'%')->get();
+            $cliente = Cliente::where('name','like','%'.$name.'%')->with('telefone','tipocliente','vendedor')->get();
             if(!$cliente){
 
                 return response()->json(['error' => 'Não foi possível encontrar o cliente'], 400);
