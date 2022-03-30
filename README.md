@@ -104,6 +104,8 @@ Ou cole em sua pasta de preferência
 
 ```
 obs: A flag --seed gera usuarios falasos que podem logar no sistema, senha padrão é  **password**
+
+
 obs2: caso o jwt não seja reconhecido você pode usar o comendo   php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider", para publicá-lo
 
 
