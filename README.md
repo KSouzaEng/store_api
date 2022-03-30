@@ -137,3 +137,11 @@ para consumir a api pode ser usado o Postman ou o Insomnia
 ## Visualizar o código
 
 [Visual Studio Code: Para editar do projeto ](https://code.visualstudio.com/download)
+
+## Melhorias
+
+```
+Implementar  um interface
+Implementar testes automatizados
+Implementar mais validações de campos
+```
