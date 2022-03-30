@@ -10,6 +10,8 @@ use App\Models\Telefone;
 use App\Models\TipoCliente;
 use App\Models\VendedorCliente;
 use App\Models\Imagem;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\NewClient;
 use Illuminate\Support\Facades\Auth;
 
 class ClienteController extends Controller
@@ -28,6 +30,7 @@ class ClienteController extends Controller
 
                 'name' => $input['name'],
                 'email' => $input['email'],
+                'imagem' => $path
             ]);
 
             if(!$cliente){
@@ -53,6 +56,8 @@ class ClienteController extends Controller
                         'cliente_id' => $cliente->id
 
                     ]);
+
+                    Notification::send(['krmcristine@gmail.com'], new NewClient());
 
                     return response()->json(['success' =>  $cliente], 200);
 
@@ -83,10 +88,9 @@ class ClienteController extends Controller
         try {
             // $input = $request->validated();
 
-            $name = $request->name;
-            dd($name);
+            $name = $request['imagem']->getClientOriginalName();
 
-            $path = $request->imagem->store('public/clientes');
+            $path = $request['imagem']->store('public/clientes');
 
             $cliente = Cliente::where('id',$id)->update([
 
@@ -147,7 +151,7 @@ class ClienteController extends Controller
 
             $cliente = Cliente::create([
                 'cliente_id' => $request->cliente_id
-                ''
+
             ]);
 
 
