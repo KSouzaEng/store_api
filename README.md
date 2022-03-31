@@ -121,7 +121,16 @@ DB_DATABASE=store
 DB_USERNAME=root
 DB_PASSWORD=
 ```
-
+## Envio de email
+- Para enviar e-mail da aplicação é necessário adicionar a configuração
+```
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=d6d20ebf6da463
+MAIL_PASSWORD=f4daf8aff8fd44
+MAIL_ENCRYPTION=tls
+```
 ## Rodando a api
 ```shell
 php artisan serve
