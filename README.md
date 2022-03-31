@@ -124,6 +124,7 @@ DB_PASSWORD=
 ## Envio de email
 - Para enviar e-mail da aplicação é necessário adicionar a configuração
 - Aa variáveis MAIL_USERNAME e MAIL_PASSWORD devem ser criadas use o  [Mailtrap](https://mailtrap.io/) para esta finalidade
+- Crie uma conta no Mailtrap, ao entrar na página procure por **Integrations** e selecione a opção laravel 7+
 ```
 MAIL_MAILER=smtp
 MAIL_HOST=smtp.mailtrap.io
